@@ -1,6 +1,11 @@
 <template>
   <div class="father">
     我是父导航，哈哈哈哈
+
+    <ul>
+      <li><router-link to="/father/sub1">子导航1</router-link></li>
+      <li><router-link to="/father/sub2">子导航2</router-link></li>
+    </ul>
   </div>
 </template>
 
@@ -12,7 +17,7 @@ export default {
 
 <style scoped>
   .father {
-    text-align: center;
+    text-align: left;
     font-size: 20px;
     font-weight: 900;
     font-style: italic;

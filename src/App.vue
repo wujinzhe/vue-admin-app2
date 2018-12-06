@@ -1,5 +1,6 @@
 <template>
-  <el-container id="app">
+  <el-container
+    id="app">
     <el-aside
       class="aside"
       width="200px">
@@ -28,13 +29,6 @@ export default {
   components: {
     TheAppHeader,
     TheAppMenu
-  },
-  data () {
-    return {
-    }
-  },
-  created () {
-    this.$Util.test()
   }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div>
-    子导航1
+    用户详情
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'ViewUserDetail'
 }
 </script>

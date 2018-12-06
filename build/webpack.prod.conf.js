@@ -7,6 +7,7 @@ const baseWebpack = require('./webpack.base.conf')
 module.exports = () => {
   return merge(baseWebpack, {
     mode: 'production',
+    entry: path.resolve(__dirname, '../src/main_build.js'),
     output: {
       publicPath: 'http://172.30.61.123/vue-admin-app2/dist/'
     },

@@ -5,9 +5,11 @@
       class="breadcrumb"
       separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+
+      <el-breadcrumb-item
+        v-for="(item, index) in breadcrumbList"
+        :to="item.path"
+        :key="index">{{ item.title }}</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="header-operate">
       <el-dropdown trigger="click">
@@ -24,8 +26,51 @@
 </template>
 
 <script>
-export default {
+function getPath (path, routes) {
+  let routerArray = path.split('/')
+  let origin = routerArray.shift() // 拉出第一个元素，因为是''
+  let currentPath = []
+  while (routerArray.length > 0) {
+    origin = `${origin}/${routerArray.shift()}`
+    routes.forEach(item => {
+      if (item.path === origin) {
+        item.parent && currentPath.push({
+          title: item.parent
+        })
 
+        currentPath.push({
+          title: item.title,
+          path: item.path
+        })
+      }
+    })
+  }
+  return currentPath
+}
+export default {
+  name: 'TheAppHeader',
+  data () {
+    return {
+      breadcrumbList: []
+    }
+  },
+  watch: {
+    '$route' () {
+      this.changeRouter()
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.changeRouter()
+      }, 100)
+    })
+  },
+  methods: {
+    changeRouter () {
+      this.breadcrumbList = getPath(this.$route.path, this.$router.options.routes)
+    }
+  }
 }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
   <div>
-    子导航1
+    添加用户
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'ViewUserAdd'
 }
 </script>

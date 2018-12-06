@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import menu from './menu'
 
 Vue.use(Router)
 
 var router = new Router({
   routes: [
-    {
-      path: '/father',
-      title: '父导航',
-      name: 'Father',
-      component: () => import('../views/ViewApp2.vue')
-    }
+    ...menu
   ]
 })
+
+// router.afterEach((to, from) => {
+//   console.log('to', to)
+// })
 
 export default router
