@@ -9,7 +9,10 @@ const webpack = require('webpack')
 process.env.NODE_ENV = 'development'
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/main.js'),
+  entry: {
+    main: path.resolve(__dirname, '../src/main.js'),
+    router: path.resolve(__dirname, '../src/router/index.js')
+  },
   output: {
     path: path.resolve(__dirname, '../dist/'),
     // filename: 'js/[name].[hash:6].js'
