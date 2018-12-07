@@ -17,3 +17,10 @@ new Vue({
   components: { App },
   template: '<App />'
 })
+
+// 可以为了调试使用
+window.apps = window.apps || {}
+window.apps.app2 = new Vue({
+  router,
+  template: '<router-view />'
+})

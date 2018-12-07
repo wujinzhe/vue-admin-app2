@@ -103,12 +103,16 @@ module.exports = {
       files: ['src/**/*.{vue,htm,html,css,sss,less,scss,sass}']
     }),
     new webpack.DllReferencePlugin({
-      manifest: require(path.resolve(__dirname, '../library/library.json'))
+      manifest: require('vue-admin-library/lib/library.json')
     }),
     new CopyWebpackPlugin([
       {
         from: 'static/',
         to: 'static'
+      },
+      {
+        from: 'node_modules/vue-admin-library/lib/',
+        to: 'library'
       }
     ]),
     new HashedChunkidsPlugin({

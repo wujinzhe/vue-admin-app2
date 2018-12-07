@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --progress --inline  --config ./build/webpack.dev.conf.js",
     "build": "webpack --progress --config ./build/webpack.prod.conf.js",
-    "dll": "webpack --progress --config ./build/webpack.library.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --ext .js,.vue src",
     "stylelint": "stylelint --fix src"
@@ -70,6 +69,7 @@
     "axios": "^0.18.0",
     "element-ui": "^2.4.11",
     "vue": "^2.5.16",
+    "vue-admin-library": "0.0.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   }
