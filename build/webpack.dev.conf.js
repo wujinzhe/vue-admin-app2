@@ -3,6 +3,8 @@ const baseWebpack = require('./webpack.base.conf')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 const os = require('os')
 
 const ip = os.networkInterfaces().en0[1].address
@@ -11,11 +13,17 @@ module.exports = () => {
   const devWebpackConfig = merge(baseWebpack, {
     devtool: 'cheap-eval-source-map',
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new CopyWebpackPlugin([
+        {
+          from: 'dist/',
+          to: 'dist'
+        }
+      ])
     ],
     devServer: {
       clientLogLevel: 'warning',
-      port: 8080,
+      port: 8081,
       host: '0.0.0.0',
       quiet: true,
       hot: true,

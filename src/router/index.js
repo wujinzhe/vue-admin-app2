@@ -14,4 +14,6 @@ var router = new Router({
 //   console.log('to', to)
 // })
 
+window.router = router
+
 export default router
