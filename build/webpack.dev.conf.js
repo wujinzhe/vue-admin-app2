@@ -3,6 +3,9 @@ const baseWebpack = require('./webpack.base.conf')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const webpack = require('webpack')
+const os = require('os')
+
+const ip = os.networkInterfaces().en0[1].address
 
 module.exports = () => {
   const devWebpackConfig = merge(baseWebpack, {
@@ -76,6 +79,8 @@ module.exports = () => {
             messages: [`项目已经运行: http://${devWebpackConfig.devServer.host}:${port}`]
           }
         }))
+        // 设置dev下的public路径
+        devWebpackConfig.output.publicPath = `http://${ip || '0.0.0.0'}:${port}/`
         resolve(devWebpackConfig)
       }
     })
