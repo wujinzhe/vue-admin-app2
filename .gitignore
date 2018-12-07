@@ -2,6 +2,8 @@ yarn-debug.log*
 yarn-error.log*
 *.zip
 config/
+node_modules/
+dist/
 
 # Editor directories and files
 .idea
