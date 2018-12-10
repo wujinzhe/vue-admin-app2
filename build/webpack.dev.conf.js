@@ -3,7 +3,6 @@ const baseWebpack = require('./webpack.base.conf')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const webpack = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const os = require('os')
 
@@ -14,13 +13,11 @@ module.exports = () => {
     devtool: 'cheap-eval-source-map',
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new CopyWebpackPlugin([
-        {
-          from: 'dist/',
-          to: 'dist'
-        }
-      ])
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': '"development"'
+      })
     ],
+
     devServer: {
       clientLogLevel: 'warning',
       port: 8081,

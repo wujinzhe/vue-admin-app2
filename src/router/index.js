@@ -7,8 +7,8 @@ var router = new Router({
   ]
 })
 
-window.router = router
+window.apps = window.apps || {}
 
-window.router = router
+window.apps.app2 = router
 
 export default router

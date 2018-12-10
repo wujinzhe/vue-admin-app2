@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HashedChunkidsPlugin = require('webpack-hashed-chunkids')
 const webpack = require('webpack')
-process.env.NODE_ENV = 'development'
 
 module.exports = {
   entry: {
@@ -46,9 +45,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          process.env.NODE_ENV !== 'production'
-            ? 'vue-style-loader'
-            : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
+          // process.env.NODE_ENV !== 'production'
+          //   ? 'vue-style-loader'
+          //   : MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },

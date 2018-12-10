@@ -23,9 +23,7 @@ const prodWebpackConfig = merge(baseWebpack, {
   plugins: [
     // 定义该环境下的全局变量
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': '"production"'
-      }
+      'process.env.NODE_ENV': '"production"'
     }),
     new CleanWebpackPlugin(['dist/*'], {
       root: path.resolve(__dirname, '../'),
