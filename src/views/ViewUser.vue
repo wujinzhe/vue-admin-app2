@@ -4,13 +4,28 @@
     <ul>
       <li><router-link to="/user/add">添加用户</router-link></li>
       <li><router-link to="/user/detail">用户详情</router-link></li>
+      <li><router-link to="/user/detail">用户详情</router-link></li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ViewUser'
+  name: 'ViewUser',
+  data () {
+    return {
+      app1Data: '1'
+    }
+  },
+  mounted () {
+    console.log('app1.store', window.apps.app1)
+    console.log('store', this.$store)
+  },
+  methods: {
+    // changeApp1Data () {
+
+    // }
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 export default {
   state: {
-    name: 'name'
+    name: 'APP1'
   },
   mutations: {
     setName (state, name) {

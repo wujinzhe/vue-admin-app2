@@ -1,8 +1,8 @@
 /*
- * @Author: 吴晋哲 
- * @Date: 2018-04-10 14:19:50 
- * @Last Modified by: 吴晋哲
- * @Last Modified time: 2018-08-08 17:49:02
+ * @Author: 吴晋哲
+ * @Date: 2018-04-10 14:19:50
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-12-11 17:22:18
  */
 
 import Vue from 'vue'
@@ -25,5 +25,11 @@ const store = new Vuex.Store({
     ...m
   }
 })
+
+window.apps = window.apps || {}
+
+window.apps.app1 = window.apps.app1 || {}
+
+window.apps.app1.store = store
 
 export default store

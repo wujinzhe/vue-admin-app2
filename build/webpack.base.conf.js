@@ -45,10 +45,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          // process.env.NODE_ENV !== 'production'
-          //   ? 'vue-style-loader'
-          //   : MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV !== 'production'
+            ? 'vue-style-loader'
+            : MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },
