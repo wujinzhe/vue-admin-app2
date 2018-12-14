@@ -3,9 +3,8 @@ const baseWebpack = require('./webpack.base.conf')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const webpack = require('webpack')
-
 const os = require('os')
-
+// console.log(os.networkInterfaces())
 const ip = os.networkInterfaces().en0[1].address
 
 module.exports = () => {
@@ -85,7 +84,7 @@ module.exports = () => {
           }
         }))
         // 设置dev下的public路径
-        devWebpackConfig.output.publicPath = `http://${ip || '0.0.0.0'}:${port}/`
+        // devWebpackConfig.output.publicPath = `http://${ip || '0.0.0.0'}:${port}/`
         resolve(devWebpackConfig)
       }
     })

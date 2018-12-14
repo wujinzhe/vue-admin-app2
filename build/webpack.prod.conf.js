@@ -4,7 +4,7 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseWebpack = require('./webpack.base.conf')
 const inquirer = require('inquirer')
-const list = require('../config/path.js')
+const list = require('../config/path')
 process.env.NODE_ENV = 'production'
 
 const prodWebpackConfig = merge(baseWebpack, {

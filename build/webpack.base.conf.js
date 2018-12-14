@@ -4,7 +4,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HashedChunkidsPlugin = require('webpack-hashed-chunkids')
+const WebpackHashChunkPlugin = require('webpack-hash-chunk-plugin')
+// const WebpackHashChunkPlugin = require('../config/hash')
 const webpack = require('webpack')
 
 module.exports = {
@@ -45,7 +46,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          // MiniCssExtractPlugin.loader,
           process.env.NODE_ENV !== 'production'
             ? 'vue-style-loader'
             : MiniCssExtractPlugin.loader,
@@ -118,10 +118,10 @@ module.exports = {
         to: 'library'
       }
     ]),
-    new HashedChunkidsPlugin({
-      hashFunction: 'md5', // The hashing algorithm to use, defaults to 'md5'. All functions from Node.JS' crypto.createHash are supported.
-      hashDigest: 'hex', // The encoding to use when generating the hash, defaults to 'hex'. All encodings from Node.JS' hash.digest are supported.
-      hashDigestLength: 4 // The prefix length of the hash digest to use, defaults to 4.
+    new WebpackHashChunkPlugin({
+      algorithm: 'md5',
+      encoding: 'hex', // hex, latin1, base64
+      length: 4
     })
   ]
 }
