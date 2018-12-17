@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --inline  --config ./build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --mode development --progress --inline  --config ./build/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production webpack --progress --config ./build/webpack.prod.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --ext .js,.vue src",

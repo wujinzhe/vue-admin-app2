@@ -31,7 +31,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist/'),
-    filename: 'js/[name].[chunkhash:6].js'
+    // 不同的环境构建，将使用不同的hash策略
+    filename: process.env.NODE_ENV === 'production' ? 'js/[name].[contenthash:6].js' : 'js/[name].[hash:6].js'
   },
   module: {
     rules: [
@@ -97,7 +98,7 @@ module.exports = {
       template: `index.html`
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:6].css'
+      filename: process.env.NODE_ENV === 'production' ? 'css/[name].[contenthash:6].css' : 'css/[name].[hash:6].css'
     }),
     // vue-loader 必须引入的插件
     new VueLoaderPlugin(),
