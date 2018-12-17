@@ -5,18 +5,33 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WebpackHashChunkPlugin = require('webpack-hash-chunk-plugin')
-// const WebpackHashChunkPlugin = require('../config/hash')
 const webpack = require('webpack')
+
+// 产生关联文件的插件，将关联文件的hash值去掉
+function WebpackCreateExtraFile () {}
+WebpackCreateExtraFile.prototype.apply = function apply (compiler) {
+  compiler.hooks.compilation.tap('WebpackCreateExtraFile', (compilation) => {
+    compilation.hooks.afterOptimizeChunkAssets.tap('WebpackCreateExtraFile', (chunks) => {
+      chunks.forEach(chunk => {
+        chunk.files.forEach(file => {
+          if (/associate\.[\d\w]{6}.js/ig.test(file)) {
+            compilation.assets['js/associate.js'] = compilation.assets[file]
+            delete compilation.assets[file]
+          }
+        })
+      })
+    })
+  })
+}
 
 module.exports = {
   entry: {
     main: path.resolve(__dirname, '../src/main.js'),
-    router: path.resolve(__dirname, '../src/router/index.js')
+    associate: path.resolve(__dirname, '../src/associate.js')
   },
   output: {
     path: path.resolve(__dirname, '../dist/'),
-    // filename: 'js/[name].[hash:6].js'
-    filename: 'js/[name].js'
+    filename: 'js/[name].[chunkhash:6].js'
   },
   module: {
     rules: [
@@ -58,23 +73,9 @@ module.exports = {
           process.env.NODE_ENV !== 'production'
             ? 'vue-style-loader'
             : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader'
-            // options: {
-            //   modules: true,
-            //   localIdentName: '[path][name]__[local]--[hash:base64:5]'
-            // }
-          },
+          'css-loader',
           'postcss-loader',
           'sass-loader'
-          // {
-          //   loader: 'sass-resources-loader',
-          //   options: {
-          //     resources: [
-          //       path.resolve(__dirname, '../src/theme/default/variables.scss')
-          //     ]
-          //   }
-          // }
         ]
       },
       {
@@ -93,8 +94,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: `index.html`,
-      template: `index.html`,
-      chunksSortMode: 'dependency'
+      template: `index.html`
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:6].css'
@@ -122,6 +122,7 @@ module.exports = {
       algorithm: 'md5',
       encoding: 'hex', // hex, latin1, base64
       length: 4
-    })
+    }),
+    new WebpackCreateExtraFile()
   ]
 }

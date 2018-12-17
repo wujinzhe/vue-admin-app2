@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --progress --inline  --config ./build/webpack.dev.conf.js",
-    "build": "webpack --progress --config ./build/webpack.prod.conf.js",
+    "dev": "webpack-dev-server --mode development --inline  --config ./build/webpack.dev.conf.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --config ./build/webpack.prod.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --ext .js,.vue src",
     "stylelint": "stylelint --fix src"
@@ -23,6 +23,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
     "eslint": "^5.4.0",
     "eslint-config-standard": "^12.0.0-alpha.0",
@@ -62,7 +63,7 @@
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4",
-    "webpack-hash-chunk-plugin": "0.0.3",
+    "webpack-hash-chunk-plugin": "0.0.5",
     "webpack-hashed-chunkids": "^1.0.8",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.1.3"

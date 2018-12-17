@@ -4,8 +4,7 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseWebpack = require('./webpack.base.conf')
 const inquirer = require('inquirer')
-const list = require('../config/path')
-process.env.NODE_ENV = 'production'
+const config = require('../config/')
 
 const prodWebpackConfig = merge(baseWebpack, {
   mode: 'production',
@@ -39,7 +38,7 @@ module.exports = new Promise((resolve, reject) => {
     default: 'default',
     message: '你想要打包的资源路径是',
     name: 'path',
-    choices: list
+    choices: config.prod.publicPathList
   }
   inquirer.prompt([ question ]).then(answers => {
     prodWebpackConfig.output.publicPath = answers.path

@@ -14,7 +14,7 @@
     <div class="header-operate">
       <el-dropdown trigger="click">
         <span class="name-link">
-          子项目1132<i class="el-icon-arrow-down el-icon--right"/>
+          子项目16555<i class="el-icon-arrow-down el-icon--right"/>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>

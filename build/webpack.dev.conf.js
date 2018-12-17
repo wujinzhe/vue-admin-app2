@@ -21,25 +21,11 @@ module.exports = () => {
       clientLogLevel: 'warning',
       port: 8081,
       host: '0.0.0.0',
-      quiet: true,
+      // quiet: true,
       hot: true,
       compress: true, // 一切服务都是用gzip压缩
       // 配置静态文件目录
       contentBase: false,
-      // watchContentBase: true,
-      // 提供在服务器内部的所有其他中间件之后执行自定义中间件的能力。
-      // after (app) {
-      // },
-      // 提供在服务器内部的所有其他中间件之前执行自定义中间件的能力。这可用于定义自定义处理程序
-      // before (app) {
-      //   app.get('/some/path', function(req, res) {
-      //     res.json({ custom: 'response' });
-      //   })
-      // },
-      // 添加头部信息
-      // headers: {
-      //   "X-Custom-Foo": "bar"
-      // },
       proxy: {
         '/api/mbp/': {
           target: 'http://172.30.2.13:8080/mbp-gateway/', // 开发环境
@@ -50,11 +36,11 @@ module.exports = () => {
         }
       },
       // 开启服务器时，打开浏览器
-      open: true,
-      overlay: {
-        warnings: true,
-        errors: true
-      },
+      // open: true,
+      // overlay: {
+      //   warnings: true,
+      //   errors: true
+      // },
       // 打开页面的路由
       // openPage: 'demo',
       // publicPath: '/static'
@@ -69,7 +55,7 @@ module.exports = () => {
       }
     }
   })
-
+  // return devWebpackConfig
   return new Promise((resolve, reject) => {
     portfinder.basePort = devWebpackConfig.devServer.port
     portfinder.getPort((err, port) => {
@@ -84,7 +70,7 @@ module.exports = () => {
           }
         }))
         // 设置dev下的public路径
-        // devWebpackConfig.output.publicPath = `http://${ip || '0.0.0.0'}:${port}/`
+        devWebpackConfig.output.publicPath = `http://${ip || '0.0.0.0'}:${port}/`
         resolve(devWebpackConfig)
       }
     })
