@@ -8,10 +8,10 @@ const WebpackHashChunkPlugin = require('webpack-hash-chunk-plugin')
 const webpack = require('webpack')
 
 // 产生关联文件的插件，将关联文件的hash值去掉
-function WebpackCreateExtraFile () {}
-WebpackCreateExtraFile.prototype.apply = function apply (compiler) {
-  compiler.hooks.compilation.tap('WebpackCreateExtraFile', (compilation) => {
-    compilation.hooks.afterOptimizeChunkAssets.tap('WebpackCreateExtraFile', (chunks) => {
+function WebpackCreateAssociate () {}
+WebpackCreateAssociate.prototype.apply = function apply (compiler) {
+  compiler.hooks.compilation.tap('WebpackCreateAssociate', (compilation) => {
+    compilation.hooks.afterOptimizeChunkAssets.tap('WebpackCreateAssociate', (chunks) => {
       chunks.forEach(chunk => {
         chunk.files.forEach(file => {
           if (/associate\.[\d\w]{6}.js/ig.test(file)) {
@@ -48,7 +48,6 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         include: path.resolve(__dirname, '../src/'),
         loader: 'babel-loader',
         options: {
@@ -95,7 +94,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: `index.html`,
-      template: `index.html`
+      template: `index.html`,
+      chunks: ['main']
     }),
     new MiniCssExtractPlugin({
       filename: process.env.NODE_ENV === 'production' ? 'css/[name].[contenthash:6].css' : 'css/[name].[hash:6].css'
@@ -124,6 +124,6 @@ module.exports = {
       encoding: 'hex', // hex, latin1, base64
       length: 4
     }),
-    new WebpackCreateExtraFile()
+    new WebpackCreateAssociate()
   ]
 }

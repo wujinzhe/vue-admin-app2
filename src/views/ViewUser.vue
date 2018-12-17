@@ -18,7 +18,7 @@ export default {
     }
   },
   mounted () {
-    console.log('app1.store', window.apps.app1)
+    // console.log('app1.store', window.apps.app1)
     console.log('store', this.$store)
   },
   methods: {

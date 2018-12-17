@@ -4,6 +4,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const webpack = require('webpack')
 const opn = require('opn')
+const config = require('../config')
 const os = require('os')
 const ip = os.networkInterfaces().en0[1].address
 var devWebpackConfig = {}
@@ -19,9 +20,10 @@ WebpackDevCompilation.prototype.apply = function apply (compiler) {
 
 module.exports = () => {
   devWebpackConfig = merge(baseWebpack, {
+    mode: 'development',
     devtool: 'cheap-eval-source-map',
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin(), // 热更新所必须的插件
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"development"'
       }),
@@ -34,30 +36,10 @@ module.exports = () => {
       host: '0.0.0.0',
       quiet: true,
       hot: true,
-      compress: true, // 一切服务都是用gzip压缩
-      // 配置静态文件目录
-      contentBase: false,
-      proxy: {
-        '/api/mbp/': {
-          target: 'http://172.30.2.13:8080/mbp-gateway/', // 开发环境
-          changeOrigin: true,
-          pathRewrite: {
-            '^/api/mbp/': ''
-          }
-        }
-      },
-      // useLocalIp: true,
-      stats: {
-        all: false,
-        timings: true,
-        version: true,
-        builtAt: true,
-        assets: true,
-        assetsSort: 'field'
-      }
+      proxy: config.dev.proxy
     }
   })
-  // return devWebpackConfig
+
   return new Promise((resolve, reject) => {
     portfinder.basePort = devWebpackConfig.devServer.port
     portfinder.getPort((err, port) => {
