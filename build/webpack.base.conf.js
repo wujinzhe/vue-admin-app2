@@ -107,7 +107,7 @@ module.exports = {
       files: ['src/**/*.{vue,htm,html,css,sss,less,scss,sass}']
     }),
     new webpack.DllReferencePlugin({
-      manifest: require('vue-admin-library/lib/library.json')
+      manifest: require('vue-admin-main/lib/common/library.json')
     }),
     new CopyWebpackPlugin([
       {
@@ -115,7 +115,7 @@ module.exports = {
         to: 'static'
       },
       {
-        from: 'node_modules/vue-admin-library/lib/',
+        from: 'node_modules/vue-admin-main/lib/common/',
         to: 'library'
       }
     ]),

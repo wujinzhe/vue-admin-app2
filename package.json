@@ -1,5 +1,5 @@
 {
-  "name": "vue-admin",
+  "name": "vue-admin-app2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -71,8 +71,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.11",
-    "vue-admin-layout": "0.0.1",
-    "vue-admin-library": "0.0.1",
+    "vue-admin-main": "^0.1.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   }
