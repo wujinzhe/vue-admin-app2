@@ -4,7 +4,6 @@
 
 <script>
 import TheAppLayout from 'vue-admin-main/lib/Layout'
-console.log('TheAppLayout', TheAppLayout)
 
 export default {
   name: 'App',

@@ -10,13 +10,21 @@ const ip = os.networkInterfaces().en0[1].address
 var devWebpackConfig = {}
 
 // 监听compiler 在afterEmit时打开浏览器
-function WebpackDevCompilation () {}
-WebpackDevCompilation.prototype.apply = function apply (compiler) {
-  compiler.hooks.afterEmit.tap('WebpackDevCompilation', (compilation) => {
-    !Object.keys(compilation.assets).some(item => /\.hot-update\.json/ig.test(item)) &&
-     opn(devWebpackConfig.output.publicPath, { app: 'Google Chrome' })
-  })
-}
+// function WebpackDevCompilation () {}
+// WebpackDevCompilation.prototype.apply = function apply (compiler) {
+//   compiler.hooks.done.tap('WebpackDevCompilation', (compilation) => {
+//     // Object.keys(compilation.assets).some(item => {
+//     //   console.log(item)
+//     //   // return /\.hot-update\.json/ig.test(item)
+//     // })
+//     Object.keys(compilation.assets).some(item => {
+//       console.log('-------')
+//       console.log(item, /\.hot-update\.json/ig.test(item))
+//       return /\.hot-update\.json/ig.test(item)
+//     }) &&
+//      opn(devWebpackConfig.output.publicPath, { app: 'Google Chrome' })
+//   })
+// }
 
 module.exports = () => {
   devWebpackConfig = merge(baseWebpack, {
@@ -26,8 +34,8 @@ module.exports = () => {
       new webpack.HotModuleReplacementPlugin(), // 热更新所必须的插件
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"development"'
-      }),
-      new WebpackDevCompilation()
+      })
+      // new WebpackDevCompilation()
     ],
 
     devServer: {
@@ -36,6 +44,7 @@ module.exports = () => {
       host: '0.0.0.0',
       quiet: true,
       hot: true,
+      open: true,
       proxy: config.dev.proxy
     }
   })
